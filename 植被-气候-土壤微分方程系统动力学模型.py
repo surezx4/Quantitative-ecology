@@ -1,61 +1,61 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Aug 15 14:56:59 2025
+# -*- 编码: utf-8 -*-
+'""'
+创建于2025年8月15日星期五14:56:59
 
-@author: Administrator
-"""
+@作者: 管理员
+'""'
 
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from scipy.integrate import solve_ivp
-import os
-import seaborn as sns
-from sklearn.preprocessing import StandardScaler
-import statsmodels.api as sm
-from matplotlib.figure import Figure
-import matplotlib.dates as mdates
+导入 tkinter 为 tk
+从 tkinter 导入 ttk, filedialog, messagebox
+导入 numpy 为 np
+导入 pandas 为 pd
+导入 matplotlib.pyplot 为 plt
+从 matplotlib.backends.backend_tkagg 导入 FigureCanvasTkAgg
+从 scipy.integrate 导入 solve_ivp
+导入 os
+导入 seaborn 为 sns
+从 sklearn.preprocessing 导入 StandardScaler
+导入 statsmodels.api 为 sm
+从 matplotlib.figure 导入 Figure
+导入 matplotlib.dates 为 mdates
 
 # 设置中文显示
-plt.rcParams["font.family"] = ["SimHei", "WenQuanYi Micro Hei", "Heiti TC"]
+plt.rcParams["font.family"] = ["思源黑体", " WenQuanYi Micro Hei", "黑体 TC"]
 plt.rcParams["axes.unicode_minus"] = False  # 解决负号显示问题
 
-class EcologicalSystemModel:
+类 生态系统模型：
     """生态系统动力学模型类，包含模型参数和微分方程定义"""
     
-    def __init__(self):
+    定义 __init__(self):
         # 模型参数初始化
         self.params = {
             # 生态因子对气象因子的敏感性参数
-            'fvc_temp_sens': 0.02,    # FVC对温度的敏感性
-            'fvc_precip_sens': 0.001, # FVC对降水的敏感性
-            'ndvi_temp_sens': 0.015,  # NDVI对温度的敏感性
-            'ndvi_precip_sens': 0.002,# NDVI对降水的敏感性
+            'fvc_temp_sens'：0.02，    # FVC对温度的敏感性
+            'fvc_precip_sens'：0.001，# FVC对降水的敏感性
+            'ndvi_temp_sens'：0.015，  # NDVI对温度的敏感性
+            'ndvi_precip_sens'：0.002，# NDVI对降水的敏感性
             'npp_temp_sens': 0.03,    # NPP对温度的敏感性
             'npp_precip_sens': 0.0015,# NPP对降水的敏感性
             
             # 生态因子之间的相互作用参数
             'fvc_ndvi_interact': 0.1, # FVC与NDVI的相互作用
-            'ndvi_npp_interact': 0.15,# NDVI与NPP的相互作用
+            'ndvi_npp_interact'：0.15，# NDVI与NPP的相互作用
             'npp_fvc_interact': 0.08, # NPP与FVC的相互作用
             
             # 其他环境因子的影响参数
-            'evap_coeff': 0.05,       # 蒸发量影响系数
-            'sunshine_coeff': 0.03,   # 日照时长影响系数
+            'evap_coeff'：0.05，       # 蒸发量影响系数
+            ' Sunshine_coeff ': 0.03,   # 日照时长影响系数
             'water_level_coeff': 0.04,# 水位波动影响系数
-            'dem_coeff': 0.02         # 地形影响系数
+            'dem_coeff'：0.02         # 地形影响系数
         }
         
         # 数据存储
-        self.data = None
-        self.years = None
-        self.dem_data = None
+        self.data = 无
+        self.年龄 = 无
+        self.dem_data = 无
         
         # 模型结果
-        self.simulation_results = None
+        self.仿真结果 = 无
     
     def load_data(self, file_path):
         """加载时间序列数据（包含生态因子和气象因子）"""
@@ -65,13 +65,13 @@ class EcologicalSystemModel:
             elif file_path.endswith('.xlsx'):
                 self.data = pd.read_excel(file_path, parse_dates=['年份'])
             else:
-                raise ValueError("不支持的文件格式，仅支持CSV和Excel文件")
+
                 
             # 提取年份信息
-            self.years = self.data['年份'].dt.year.values
+
             return True
         except Exception as e:
-            messagebox.showerror("数据加载错误", f"加载数据时发生错误: {str(e)}")
+
             return False
     
     def load_dem_data(self, file_path):
@@ -759,4 +759,5 @@ class EcosystemModelGUI:
 if __name__ == "__main__":
     root = tk.Tk()
     app = EcosystemModelGUI(root)
+
     root.mainloop()
